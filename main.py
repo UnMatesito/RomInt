@@ -5,15 +5,20 @@ roman_dict = [
 ]
 
 def roman_to_number(roman_number):
-    if (roman_number == "IIII"):
+    if ("MMMM" in roman_number or "IIII" in roman_number or "VV" in roman_number):
         print("Inexistent number")
         exit()
 
-    number = 0
+    exp_number = 0
 
     while (roman_number != ""):
-        for number, symbol in roman_dict:
-            print("")
+        for symbol, number in roman_dict:
+            if (roman_number.startswith(symbol)):
+                exp_number += number
+                roman_number = roman_number[len(symbol):]
+                break
+
+    return exp_number
 
 
     
@@ -21,7 +26,7 @@ def roman_to_number(roman_number):
 
 def number_to_roman(number):
     if (number > 3999):
-        print("The number is 4000 or grater")
+        print("The number is 4000 or greater")
         exit()
 
     roman_number = ""
@@ -36,17 +41,21 @@ def number_to_roman(number):
     return roman_number
 
 
-#print("Roman/Number converter")
+print("Roman/Number converter")
+print("Select an option: \n"
+    "1. Roman to Number \n"
+    "2. Number to Roman \n" 
+    "3. exit")
 
-#print("Select an option: \n"
-#      "1. Roman to Number \n"
-#     "2. Number to Roman")
+while (True == True):
 
-#option = input("Enter option: ")
+    option = input("Enter option: ")
 
-#if (option == 1):
-#    roman = input("Enter Roman number: ")
-#    print("Number: ", roman_to_number(roman))
-#else:
-number = int(input("Enter number: "))
-print("Roman: ", number_to_roman(number))
+    if (int(option) == 1):
+        roman = input("Enter Roman number: ")
+        print("Number: ", roman_to_number(roman))
+    elif (int(option) == 2):
+        number = int(input("Enter number: "))
+        print("Roman: ", number_to_roman(number))
+    else:
+        break
